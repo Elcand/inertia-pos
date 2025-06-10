@@ -62,10 +62,9 @@ class User extends Authenticatable
         );
     }
 
-    // public function firstName()
-    // {
-    //     $user = User::find(1);
-
-    //     $name = $user->name;
-    // }
+    public function firstName()
+    {
+        $user = User::find(1);
+        $name = $user->name;
+    }
 }
