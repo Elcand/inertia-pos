@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -53,4 +54,18 @@ class User extends Authenticatable
             return [$pr['name'] => true];
         });
     }
+
+    public function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => strtoupper($value),
+        );
+    }
+
+    // public function firstName()
+    // {
+    //     $user = User::find(1);
+
+    //     $name = $user->name;
+    // }
 }
