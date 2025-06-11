@@ -51,9 +51,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function getPermissionArray()
+    public function permissionArray()
     {
-        return $this->getAllPermission()->mapWithKeys(function ($pr) {
+        return $this->getAllPermissions()->mapWithKeys(function ($pr) {
             return [$pr['name'] => true];
         });
     }
@@ -65,9 +65,9 @@ class User extends Authenticatable
         );
     }
 
-    public function firstName()
-    {
-        $user = User::find(1);
-        $name = $user->name;
-    }
+    // public function firstName()
+    // {
+    //     $user = User::find(1);
+    //     $name = $user->name;
+    // }
 }
