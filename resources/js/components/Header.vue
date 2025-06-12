@@ -26,7 +26,7 @@
             class="c-header-toggler c-class-toggler mfs-3 d-md-down-none"
             type="button"
             data-target="#sidebar"
-            ata-class="c-sidebar-lg-show"
+            data-class="c-sidebar-lg-show"
             responsive="true"
         >
             <svg

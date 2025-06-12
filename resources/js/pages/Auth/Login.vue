@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import LayoutAuth from "../../layouts/Auth.vue";
+import LayoutAuth from "../../Layouts/Auth.vue";
 import { reactive } from "vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 

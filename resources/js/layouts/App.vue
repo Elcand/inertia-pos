@@ -19,9 +19,8 @@
                 />
                 <span class="ml-2 font-weight-bold">Cashier App</span>
             </div>
+            <Sidebar />
         </div>
-        <Sidebar />
-
         <div class="c-wrapper c-fixed-components">
             <Header />
             <div class="c-body">
@@ -29,7 +28,7 @@
                 <footer class="c-footer">
                     <div>
                         <strong>Cashier App</strong> &copy; 2025 -
-                        (name_domain).com.
+                        name_domain.com.
                     </div>
                 </footer>
             </div>
@@ -38,8 +37,8 @@
 </template>
 
 <script>
-import Header from "../components/Header.vue";
-import Sidebar from "../components/Sidebar.vue";
+import Header from "../Components/Header.vue";
+import Sidebar from "../Components/Sidebar.vue";
 
 export default {
     components: {

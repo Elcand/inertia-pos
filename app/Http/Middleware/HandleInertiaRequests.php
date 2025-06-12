@@ -45,8 +45,13 @@ class HandleInertiaRequests extends Middleware
             ],
 
             'auth' => [
-                'user'       => fn() => $request->user() ? $request->user() : null,
-                'permission' => fn() => $request->user() ? $request->user()->getPermissionArray : [],
+                'user' => fn() => $request->user() ? $request->user() : null,
+                'permission' => fn() => $request->user()
+                    ? $request->user()
+                    ->getAllPermissions()
+                    ->pluck('name')
+                    ->mapWithKeys(fn($perm) => [$perm => true])
+                    : [],
             ],
 
             'route' => function () use ($request) {

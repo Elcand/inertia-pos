@@ -58,7 +58,7 @@ class DashboardController extends Controller
             $total[]  = "";
         }
 
-        return Inertia::render('/Apps/Dashboard/Index', [
+        return Inertia::render('Apps/Dashboard/Index', [
             'sales_date'           => $sales_date,
             'grand_total'          => $grand_total,
             'count_sales_today'    => (int) $count_sales_today,

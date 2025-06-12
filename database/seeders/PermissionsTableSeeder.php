@@ -20,10 +20,10 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'dashboard.best_selling_product', 'guard_name' => 'web']);
         Permission::create(['name' => 'dashboard.product_stock', 'guard_name' => 'web']);
 
-        Permission::create(['name' => 'user.index', 'guard_name' => 'web']);
-        Permission::create(['name' => 'user.create', 'guard_name' => 'web']);
-        Permission::create(['name' => 'user.edit', 'guard_name' => 'web']);
-        Permission::create(['name' => 'user.delete', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.index', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.create', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.edit', 'guard_name' => 'web']);
+        Permission::create(['name' => 'users.delete', 'guard_name' => 'web']);
 
         Permission::create(['name' => 'roles.index', 'guard_name' => 'web']);
         Permission::create(['name' => 'roles.create', 'guard_name' => 'web']);
