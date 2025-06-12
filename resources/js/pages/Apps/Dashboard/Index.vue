@@ -33,9 +33,11 @@
                                 >
                             </div>
                             <div class="card-body">
-                                <strong>0</strong> Sell
+                                <strong>{{ count_sales_today }}</strong> Sales
                                 <hr />
-                                <h5 class="fw-bold">Rp. 0</h5>
+                                <h5 class="fw-bold">
+                                    Rp. {{ formatPrice(sum_sales_today) }}
+                                </h5>
                             </div>
                         </div>
 
@@ -50,7 +52,9 @@
                                 >
                             </div>
                             <div class="card-body">
-                                <h5 class="fw-bold">Rp. 0</h5>
+                                <h5 class="fw-bold">
+                                    Rp. {{ formatPrice(sum_profits_today) }}
+                                </h5>
                             </div>
                         </div>
                     </div>
@@ -104,6 +108,12 @@ export default {
 
     components: {
         Head,
+    },
+
+    props: {
+        count_sales_today: Number,
+        sum_sales_today: Number,
+        sum_profits_today: Number,
     },
 };
 </script>
