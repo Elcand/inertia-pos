@@ -18,7 +18,12 @@
                                     7 Days</span
                                 >
                             </div>
-                            <div class="card-body"></div>
+                            <div class="card-body">
+                                <BarChart
+                                    :chartData="chartSellWeek"
+                                    :options="options"
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -102,18 +107,75 @@
 <script>
 import LayoutApp from "../../../Layouts/App.vue";
 import { Head } from "@inertiajs/vue3";
+import { ref } from "vue";
+import { BarChart } from "vue-chart-3";
+import { Chart, registerables } from "chart.js";
+
+Chart.register(...registerables);
 
 export default {
     layout: LayoutApp,
 
     components: {
         Head,
+        BarChart,
     },
 
     props: {
         count_sales_today: Number,
         sum_sales_today: Number,
         sum_profits_today: Number,
+        sales_date: Array,
+        grand_total: Array,
+    },
+
+    setup(props) {
+        function randomBackgroundColor(length) {
+            var data = [];
+            for (var i = 0; i < length; i++) {
+                data.push(getRandomColor());
+            }
+            return data;
+        }
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF".split("");
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        const options = ref({
+            responsive: true,
+            plugins: [
+                {
+                    legend: {
+                        display: false,
+                    },
+                    title: false,
+                },
+            ],
+            beginZero: true,
+        });
+
+        const chartSellWeek = {
+            labels: props.sales_date,
+            datasets: [
+                {
+                    data: props.grand_total,
+                    backgroundColor: randomBackgroundColor(
+                        props.sales_date.length
+                    ),
+                },
+            ],
+        };
+
+        return {
+            options,
+            chartSellWeek,
+        };
     },
 };
 </script>
