@@ -101,9 +101,7 @@
                                 <div v-if="products_limit_stock.length > 0">
                                     <ol class="list-group list_group_numbered">
                                         <li
-                                            v-if="
-                                                product in products_limit_stock
-                                            "
+                                            v-for="product in products_limit_stock"
                                             :key="product.id"
                                             class="list-group-item d-flex justify-content-between align-items-start"
                                         >
@@ -111,13 +109,13 @@
                                                 <div class="fw-bold">
                                                     {{ product.title }}
                                                 </div>
-                                                <div class="text.muted">
+                                                <div class="text-muted">
                                                     Category:
                                                     {{ product.category.name }}
                                                 </div>
                                             </div>
                                             <span
-                                                class="badge bg-danger rounded-"
+                                                class="badge bg-danger rounded-pill"
                                             >
                                                 {{ product.stock }}
                                             </span>
@@ -188,14 +186,14 @@ export default {
 
         const options = ref({
             responsive: true,
-            plugins: [
-                {
-                    legend: {
-                        display: false,
-                    },
-                    title: false,
+            plugins: {
+                legend: {
+                    display: false,
                 },
-            ],
+                title: {
+                    display: false,
+                },
+            },
             beginZero: true,
         });
 
