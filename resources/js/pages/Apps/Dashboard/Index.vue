@@ -97,7 +97,40 @@
                                     Stock</span
                                 >
                             </div>
-                            <div class="card-body"></div>
+                            <div class="card-body">
+                                <div v-if="products_limit_stock.length > 0">
+                                    <ol class="list-group list_group_numbered">
+                                        <li
+                                            v-if="
+                                                product in products_limit_stock
+                                            "
+                                            :key="product.id"
+                                            class="list-group-item d-flex justify-content-between align-items-start"
+                                        >
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">
+                                                    {{ product.title }}
+                                                </div>
+                                                <div class="text.muted">
+                                                    Category:
+                                                    {{ product.category.name }}
+                                                </div>
+                                            </div>
+                                            <span
+                                                class="badge bg-danger rounded-"
+                                            >
+                                                {{ product.stock }}
+                                            </span>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div
+                                    v-else
+                                    class="alert alert-danger border-0 shadow rounded-3"
+                                >
+                                    Product Not Available!.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,6 +165,7 @@ export default {
         grand_total: Array,
         product: Array,
         total: Array,
+        products_limit_stock: Array,
     },
 
     setup(props) {
