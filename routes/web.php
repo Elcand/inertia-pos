@@ -15,6 +15,6 @@ Route::get('/', function () {
 Route::prefix('apps')->group(function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard', DashboardController::class)->name('apps.dashboard');
-        Route::get('/permissions', [PermissionController::class, 'index'])->name('apps.permissions.index');
+        Route::get('permissions', [PermissionController::class, 'index'])->name('apps.permissions.index');
     });
 });

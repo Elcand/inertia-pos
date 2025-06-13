@@ -10,10 +10,10 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller implements HasMiddleware
 {
-    public static function middleware()
+    public static function middleware(): array
     {
         return [
-            new  Middleware(['permission: permission.index'], only: ['index']),
+            new Middleware(['permission:permissions.index'], only: ['index']),
         ];
     }
 
@@ -21,10 +21,10 @@ class PermissionController extends Controller implements HasMiddleware
     {
         $permissions = Permission::when(request()->q, function ($permissions) {
             $permissions = $permissions->where('name', 'like', '%' . request()->q . '%');
-        })->latest()->paginate(5);
+        })->latest()->paginate(15);
 
-        return inertia('App/Permissions/Index', [
-            'permissions' => $permissions,
+        return inertia('Apps/Permissions/Index', [
+            'permissions' => $permissions
         ]);
     }
 }
