@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <title>Add New Role - Cashier App</title>
+        <title>Edit Role - Cashier App</title>
     </Head>
     <main class="c-main">
         <div class="container-fluid">
@@ -12,7 +12,7 @@
                         >
                             <div class="card-header">
                                 <span class="font-weight-bold"
-                                    ><i class="fa fa-shield-alt"></i> ADD
+                                    ><i class="fa fa-shield-alt"></i> EDIT
                                     ROLE</span
                                 >
                             </div>
@@ -72,7 +72,7 @@
                                                 class="btn btn-primary shadow-sm rounded-sm"
                                                 type="submit"
                                             >
-                                                SAVE
+                                                UPDATE
                                             </button>
                                             <button
                                                 class="btn btn-warning shadow-sm rounded-sm ms-3"
@@ -109,17 +109,18 @@ export default {
     props: {
         errors: Object,
         permissions: Array,
+        role: Object,
     },
 
-    setup() {
+    setup(props) {
         const form = reactive({
-            name: "",
-            permissions: [],
+            name: props.role.name,
+            permissions: props.role.permissions.map((obj) => obj.name),
         });
 
         const submit = () => {
-            router.post(
-                "/apps/roles",
+            router.put(
+                `/apps/roles/${props.role.id}`,
                 {
                     name: form.name,
                     permissions: form.permissions,
@@ -128,7 +129,7 @@ export default {
                     onSuccess: () => {
                         Swal.fire({
                             title: "Success!",
-                            text: "Role saved successfully.",
+                            text: "Role updated successfully.",
                             icon: "success",
                             showConfirmButton: false,
                             timer: 2000,

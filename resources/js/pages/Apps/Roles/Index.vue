@@ -83,7 +83,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <Link
-                                                    href="#"
+                                                    :href="`/apps/roles/${role.id}/edit`"
                                                     v-if="
                                                         hasAnyPermission([
                                                             'roles.edit',
