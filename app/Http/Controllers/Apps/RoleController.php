@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Apps;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 class RoleController extends Controller implements HasMiddleware
 {
-    public static function middleware()
+    public static function middleware(): array
     {
         return [
             new Middleware(['permission:roles.index'], only: ['index']),
@@ -25,7 +25,7 @@ class RoleController extends Controller implements HasMiddleware
     {
         $roles = Role::when(request()->q, function ($roles) {
             $roles = $roles->where('name', 'like', '%' . request()->q . '%');
-        });
+        })->with('permissions')->latest()->paginate(5);
 
         return inertia('Apps/Roles/Index', [
             'roles' => $roles,
@@ -44,8 +44,8 @@ class RoleController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         $request->validate([
-            'name'        => 'required',
-            'permissions' => 'required',
+            'name'          => 'required',
+            'permissions'   => 'required',
         ]);
 
         $role = Role::create(['name' => $request->name]);

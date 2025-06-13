@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <title>Roles - Aplikasi Kasir</title>
+        <title>Roles - Cashier App</title>
     </Head>
     <main class="c-main">
         <div class="container-fluid">
@@ -91,7 +91,7 @@
                                                     ><i
                                                         class="fa fa-pencil-alt me-1"
                                                     ></i>
-                                                    EDIT</Link
+                                                    Edit</Link
                                                 >
                                                 <button
                                                     v-if="
