@@ -81,7 +81,9 @@
                                     Selling Product</span
                                 >
                             </div>
-                            <div class="card-body"></div>
+                            <div class="card-body">
+                                <DoughnutChart :chartData="chartBestProduct" />
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -108,7 +110,7 @@
 import LayoutApp from "../../../Layouts/App.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
-import { BarChart } from "vue-chart-3";
+import { BarChart, DoughnutChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
@@ -119,6 +121,7 @@ export default {
     components: {
         Head,
         BarChart,
+        DoughnutChart,
     },
 
     props: {
@@ -127,6 +130,8 @@ export default {
         sum_profits_today: Number,
         sales_date: Array,
         grand_total: Array,
+        product: Array,
+        total: Array,
     },
 
     setup(props) {
@@ -172,9 +177,20 @@ export default {
             ],
         };
 
+        const chartBestProduct = {
+            labels: props.product,
+            datasets: [
+                {
+                    data: props.total,
+                    backgroundColor: randomBackgroundColor(5),
+                },
+            ],
+        };
+
         return {
             options,
             chartSellWeek,
+            chartBestProduct,
         };
     },
 };
