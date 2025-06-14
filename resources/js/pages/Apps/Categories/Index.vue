@@ -17,7 +17,7 @@
                                 >
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form @submit.prevent="handleSearch">
                                     <div class="input-group mb-3">
                                         <Link
                                             href="/apps/categories/create"
@@ -36,6 +36,7 @@
                                         <input
                                             type="text"
                                             class="form-control"
+                                            v-model="search"
                                             placeholder="search by category name..."
                                         />
 
@@ -119,7 +120,8 @@
 <script>
 import LayoutApp from "../../../Layouts/App.vue";
 import Pagination from "../../../Components/Pagination.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 export default {
     layout: LayoutApp,
@@ -131,7 +133,24 @@ export default {
     },
 
     props: {
-        categories: Object, 
+        categories: Object,
+    },
+
+    setup() {
+        const search = ref(
+            "" || new URL(document.location).searchParams.get("q")
+        );
+
+        const handleSearch = () => {
+            router.get("/apps/categories", {
+                q: search.value,
+            });
+        };
+
+        return {
+            search,
+            handleSearch,
+        };
     },
 };
 </script>
