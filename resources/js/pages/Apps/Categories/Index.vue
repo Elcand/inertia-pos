@@ -71,18 +71,13 @@
                                             <td>{{ category.name }}</td>
                                             <td class="text-center">
                                                 <img
-                                                    :src="category.image"
+                                                    :src="`/storage/categories/${category.image}`"
                                                     width="40"
                                                 />
                                             </td>
                                             <td class="text-center">
                                                 <Link
                                                     href="#"
-                                                    v-if="
-                                                        hasAnyPermission([
-                                                            'categories.edit',
-                                                        ])
-                                                    "
                                                     class="btn btn-success btn-sm me-2"
                                                     ><i
                                                         class="fa fa-pencil-alt me-1"
@@ -90,11 +85,6 @@
                                                     EDIT</Link
                                                 >
                                                 <button
-                                                    v-if="
-                                                        hasAnyPermission([
-                                                            'categories.delete',
-                                                        ])
-                                                    "
                                                     class="btn btn-danger btn-sm"
                                                 >
                                                     <i class="fa fa-trash"></i>
