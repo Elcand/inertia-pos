@@ -77,18 +77,18 @@
                                             </td>
                                             <td class="text-center">
                                                 <Link
-                                                    href="#"
+                                                    :href="`/apps/categories/${category.id}/edit`"
                                                     class="btn btn-success btn-sm me-2"
                                                     ><i
                                                         class="fa fa-pencil-alt me-1"
                                                     ></i>
-                                                    EDIT</Link
+                                                    Edit</Link
                                                 >
                                                 <button
                                                     class="btn btn-danger btn-sm"
                                                 >
                                                     <i class="fa fa-trash"></i>
-                                                    DELETE
+                                                    Delete
                                                 </button>
                                             </td>
                                         </tr>
