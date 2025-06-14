@@ -16,7 +16,7 @@
                                 >
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form @submit.prevent="handleSearch">
                                     <div class="input-group mb-3">
                                         <Link
                                             href="/apps/users/create"
@@ -91,7 +91,7 @@
                                                     ><i
                                                         class="fa fa-pencil-alt me-1"
                                                     ></i>
-                                                    EDIT</Link
+                                                    Edit</Link
                                                 >
                                                 <button
                                                     v-if="
@@ -102,7 +102,7 @@
                                                     class="btn btn-danger btn-sm"
                                                 >
                                                     <i class="fa fa-trash"></i>
-                                                    DELETE
+                                                    Delete
                                                 </button>
                                             </td>
                                         </tr>
@@ -121,7 +121,8 @@
 <script>
 import LayoutApp from "../../../Layouts/App.vue";
 import Pagination from "../../../Components/Pagination.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 export default {
     layout: LayoutApp,
@@ -134,6 +135,23 @@ export default {
 
     props: {
         users: Object,
+    },
+
+    setup() {
+        const search = ref(
+            "" || new URL(document.location).searchParams.get("q")
+        );
+
+        const handleSearch = () => {
+            router.get("/appa/users", {
+                q: search.value,
+            });
+        };
+
+        return {
+            search,
+            handleSearch,
+        };
     },
 };
 </script>
