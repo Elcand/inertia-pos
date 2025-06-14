@@ -95,7 +95,7 @@ class UserController extends Controller implements HasMiddleware
 
         $user->syncRoles($request->roles);
 
-        return redirect()->route('apps.user.index');
+        return redirect()->route('apps.users.index');
     }
 
     public function destroy($id)
