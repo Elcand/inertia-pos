@@ -36,6 +36,7 @@
                                         <input
                                             type="text"
                                             class="form-control"
+                                            v-model="search"
                                             placeholder="search by user name..."
                                         />
 
@@ -143,7 +144,7 @@ export default {
         );
 
         const handleSearch = () => {
-            router.get("/appa/users", {
+            router.get("/apps/users", {
                 q: search.value,
             });
         };
