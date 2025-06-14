@@ -95,6 +95,9 @@
                                                     Edit</Link
                                                 >
                                                 <button
+                                                    @click.prevent="
+                                                        destroy(user.id)
+                                                    "
                                                     v-if="
                                                         hasAnyPermission([
                                                             'users.delete',
@@ -124,6 +127,7 @@ import LayoutApp from "../../../Layouts/App.vue";
 import Pagination from "../../../Components/Pagination.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 import { ref } from "vue";
+import Swal from "sweetalert2";
 
 export default {
     layout: LayoutApp,
@@ -149,9 +153,34 @@ export default {
             });
         };
 
+        const destroy = (id) => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    router.delete(`/apps/users/${id}`);
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "User deleted successfully.",
+                        icon: "success",
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                }
+            });
+        };
+
         return {
             search,
             handleSearch,
+            destroy,
         };
     },
 };
