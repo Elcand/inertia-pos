@@ -26,7 +26,7 @@ class UserController extends Controller implements HasMiddleware
     {
         $users = User::when(request()->q, function ($users) {
             $users = $users->where('name', 'like', '%' . request()->q . '%');
-        })->with('permissions')->latest()->paginate(5);
+        })->with('roles')->latest()->paginate(5);
 
         return inertia('Apps/Users/Index', [
             'users' => $users,
