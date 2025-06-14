@@ -22,6 +22,6 @@ Route::prefix('apps')->group(function () {
         Route::get('permissions', [PermissionController::class, 'index'])->name('apps.permissions.index');
         Route::resource('/roles', RoleController::class, ['as' => 'apps']);
         Route::resource('/users', UserController::class, ['as' => 'apps']);
-        Route::resource('/cetegories', CategoryController::class, ['as' => 'apps']);
+        Route::resource('/categories', CategoryController::class, ['as' => 'apps']);
     });
 });
