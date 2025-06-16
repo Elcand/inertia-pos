@@ -71,7 +71,7 @@
                                             <td>{{ category.name }}</td>
                                             <td class="text-center">
                                                 <img
-                                                    :src="category.image"
+                                                    :src="`/storage/categories/${category.image}`"
                                                     width="40"
                                                 />
                                             </td>
