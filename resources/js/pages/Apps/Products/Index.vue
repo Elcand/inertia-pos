@@ -94,7 +94,7 @@
                                             <td>{{ product.stock }}</td>
                                             <td class="text-center">
                                                 <Link
-                                                    href="#"
+                                                    :href="`/apps/products/${product.id}/edit`"
                                                     v-if="
                                                         hasAnyPermission([
                                                             'products.edit',

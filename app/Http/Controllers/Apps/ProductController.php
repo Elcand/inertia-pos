@@ -99,24 +99,26 @@ class ProductController extends Controller
 
             $image = $request->file('image');
             $image->storeAs('products', $image->hashName(), 'public');
-
-            $product->update([
-                'barcode'       => $request->barcode,
-                'title'         => $request->title,
-                'description'   => $request->description,
-                'category_id'   => $request->category_id,
-                'buy_price'     => $request->buy_price,
-                'sell_price'    => $request->sell_price,
-                'stock'         => $request->stock,
-            ]);
+            $product->image = $image->hashName();
         }
+
+        $product->update([
+            'barcode'       => $request->barcode,
+            'title'         => $request->title,
+            'description'   => $request->description,
+            'category_id'   => $request->category_id,
+            'buy_price'     => $request->buy_price,
+            'sell_price'    => $request->sell_price,
+            'stock'         => $request->stock,
+            'image'         => $product->image
+        ]);
         return redirect()->route('apps.products.index');
     }
 
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        Storage::disk('public')->delete('products/'.basename($product->image));
+        Storage::disk('public')->delete('products/' . basename($product->image));
         $product->delete();
 
         return redirect()->route('apps.products.index');
