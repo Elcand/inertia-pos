@@ -49,7 +49,7 @@ class ProductController extends Controller
             'barcode'       => 'required|unique:products',
             'title'         => 'required',
             'description'   => 'required',
-            'categories_id' => 'required',
+            'category_id'   => 'required',
             'buy_price'     => 'required',
             'sell_price'    => 'required',
             'stock'         => 'required'
@@ -59,10 +59,10 @@ class ProductController extends Controller
         $image->storeAs('products', $image->hashName(), 'public');
 
         Product::create([
-            'image' => $request->hashName(),
-            'barcode' => $request->barcode,
-            'title' => $request->title,
-            'description' => $request->description,
+            'image'         => $image->hashName(),
+            'barcode'       => $request->barcode,
+            'title'         => $request->title,
+            'description'   => $request->description,
             'category_id'   => $request->category_id,
             'buy_price'     => $request->buy_price,
             'sell_price'    => $request->sell_price,
@@ -88,7 +88,7 @@ class ProductController extends Controller
             'barcode'       => 'required|unique:products,barcode,' . $product->id,
             'title'         => 'required',
             'description'   => 'required',
-            'categories_id' => 'required',
+            'category_id'   => 'required',
             'buy_price'     => 'required',
             'sell_price'    => 'required',
             'stock'         => 'required'
