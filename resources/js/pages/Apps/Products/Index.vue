@@ -72,7 +72,13 @@
                                             :key="index"
                                         >
                                             <td class="text-center">
-                                                {{ product.barcode }}
+                                                <Barcode
+                                                    :value="product.barcode"
+                                                    :format="'CODE39'"
+                                                    :lineColor="'#000'"
+                                                    :width="1"
+                                                    :height="20"
+                                                />
                                             </td>
                                             <td>{{ product.title }}</td>
                                             <td>
@@ -143,6 +149,7 @@ import Pagination from "../../../Components/Pagination.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 import { ref } from "vue";
 import Swal from "sweetalert2";
+import Barcode from "../../../Components/Barcode.vue";
 
 export default {
     layout: LayoutApp,
@@ -151,6 +158,7 @@ export default {
         Head,
         Link,
         Pagination,
+        Barcode,
     },
 
     props: {
