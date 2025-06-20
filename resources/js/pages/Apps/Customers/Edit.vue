@@ -12,7 +12,7 @@
                         >
                             <div class="card-header">
                                 <span class="font-weight-bold"
-                                    ><i class="fa fa-user-circle"></i> Edit
+                                    ><i class="fa fa-user-circle"></i> EDIT
                                     CUSTOMER</span
                                 >
                             </div>
