@@ -188,7 +188,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     router.delete(`/apps/products/${id}`);
-                    SWal.fire({
+                    Swal.fire({
                         title: "Deleted!",
                         text: "Product deleted successfully.",
                         icon: "success",
