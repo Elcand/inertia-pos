@@ -22,12 +22,12 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = Customer::where(request()->q, function ($customers) {
+        $customers = Customer::when(request()->q, function ($customers) {
             $customers = $customers->where('name', 'like', '%' . request()->q . '%');
         })->latest()->paginate(10);
 
         return Inertia::render('Apps/Customers/Index', [
-            'customers' => $customers
+            'customers' => $customers,
         ]);
     }
 
