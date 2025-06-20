@@ -74,7 +74,7 @@
                                             <td>{{ customer.address }}</td>
                                             <td class="text-center">
                                                 <Link
-                                                    href="#"
+                                                    :href="`/apps/customers/${customer.id}/edit`"
                                                     v-if="
                                                         hasAnyPermission([
                                                             'customers.edit',
