@@ -76,7 +76,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function destoryCart(Request $request)
+    public function destroyCart(Request $request)
     {
         $cart = Cart::with('product')
             ->whereId($request->cart_id)

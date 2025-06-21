@@ -130,6 +130,9 @@
                                         >
                                             <td class="text-center">
                                                 <button
+                                                    @click.prevent="
+                                                        destroyCart(cart.id)
+                                                    "
                                                     class="btn btn-danger btn-sm rounded-pill"
                                                 >
                                                     <i class="fa fa-trash"></i>
@@ -237,7 +240,7 @@ export default {
         customers: Array,
         carts_total: Number,
         session: Object,
-        carts: Array
+        carts: Array,
     },
 
     setup(props) {
@@ -284,6 +287,20 @@ export default {
             );
         };
 
+        const destroyCart = (cart_id) => {
+            router.post(
+                "/apps/transactions/destroyCart",
+                {
+                    cart_id: cart_id,
+                },
+                {
+                    onSuccess: () => {
+                        grandTotal.value = props.carts_total;
+                    },
+                }
+            );
+        };
+
         return {
             barcode,
             product,
@@ -292,6 +309,7 @@ export default {
             qty,
             grandTotal,
             addToCart,
+            destroyCart,
         };
     },
 };
