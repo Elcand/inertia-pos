@@ -123,7 +123,56 @@
                                             <th scope="col">Sub Total</th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody>
+                                        <tr
+                                            v-for="cart in carts"
+                                            :key="cart.id"
+                                        >
+                                            <td class="text-center">
+                                                <button
+                                                    class="btn btn-danger btn-sm rounded-pill"
+                                                >
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                            <td>{{ cart.product.title }}</td>
+                                            <td>
+                                                Rp.
+                                                {{
+                                                    formatPrice(
+                                                        cart.product.sell_price
+                                                    )
+                                                }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ cart.qty }}
+                                            </td>
+                                            <td class="text-end">
+                                                Rp.
+                                                {{ formatPrice(cart.price) }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td
+                                                colspan="4"
+                                                class="text-end fw-bold"
+                                                style="
+                                                    background-color: #e6e6e7;
+                                                "
+                                            >
+                                                Total
+                                            </td>
+                                            <td
+                                                class="text-end fw-bold"
+                                                style="
+                                                    background-color: #e6e6e7;
+                                                "
+                                            >
+                                                Rp.
+                                                {{ formatPrice(carts_total) }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                                 <hr />
                                 <div
@@ -188,6 +237,7 @@ export default {
         customers: Array,
         carts_total: Number,
         session: Object,
+        carts: Array
     },
 
     setup(props) {
