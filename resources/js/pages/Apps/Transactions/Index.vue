@@ -221,6 +221,7 @@
                                         Cancel
                                     </button>
                                     <button
+                                        @click.prevent="storeTransaction"
                                         class="btn btn-purple btn-md border-0 shadow text-uppercase"
                                         :disabled="
                                             cash < grandTotal || grandTotal == 0
@@ -245,6 +246,7 @@ import VueMultiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
 import { ref } from "vue";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
     layout: LayoutApp,
@@ -338,6 +340,44 @@ export default {
             change.value = cash.value - grandTotal.value;
         };
 
+        const customer_id = ref("");
+
+        const storeTransaction = () => {
+            axios
+                .post("/apps/transactions/store", {
+                    customer_id: customer_id.value ? customer_id.value.id : "",
+                    discount: discount.value,
+                    grand_total: grandTotal.value,
+                    cash: cash.value,
+                    change: change.value,
+                })
+                .then((response) => {
+                    clearSearch();
+                    qty.value = 1;
+                    grandTotal.value = props.carts_total;
+                    cash.value = 0;
+                    change.value = 0;
+                    customer_id.value = "";
+
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Transaction Successfully.",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    }).then(() => {
+                        setTimeout(() => {
+                            window.open(
+                                `/apps/transactions/print?invoice=${response.data.data.invoice}`,
+                                "_blank"
+                            );
+
+                            location.reload();
+                        }, 50);
+                    });
+                });
+        };
+
         return {
             barcode,
             product,
@@ -352,6 +392,8 @@ export default {
             discount,
             setDiscount,
             setChange,
+            customer_id,
+            storeTransaction,
         };
     },
 };

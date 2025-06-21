@@ -143,7 +143,7 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::with('details.product', 'cashier', 'customer')
             ->where('invoice', $request->invoice)
-            ->findOrFail();
+            ->firstOrFail();
 
         return view('print.nota', compact('transaction'));
     }
