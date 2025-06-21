@@ -56,9 +56,9 @@ class TransactionController extends Controller
             return redirect()->back()->with('error', 'Out of Stock Product!.');
         }
 
-        $cart = Cart::whit('product')
+        $cart = Cart::with('product')
             ->where('product_id', $request->product_id)
-            ->where('cashier_id', $request->auth()->user()->id)
+            ->where('cashier_id', auth()->user()->id)
             ->first();
 
         if ($cart) {

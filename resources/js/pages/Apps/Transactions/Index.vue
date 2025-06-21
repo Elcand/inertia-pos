@@ -54,6 +54,7 @@
                                         CLEAR
                                     </button>
                                     <button
+                                        @click.prevent="addToCart"
                                         class="btn btn-success btn-md border-0 shadow text-uppercase mt-3"
                                         :disabled="!product.id"
                                     >
@@ -64,6 +65,14 @@
                         </div>
                     </div>
                     <div class="col-md-8">
+                        <div v-if="session.error" class="alert alert-danger">
+                            {{ session.error }}
+                        </div>
+
+                        <div v-if="session.success" class="alert alert-success">
+                            {{ session.success }}
+                        </div>
+
                         <div
                             class="card border-0 rounded-3 shadow border-top-success"
                         >
@@ -160,7 +169,7 @@
 
 <script>
 import LayoutApp from "../../../Layouts/App.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import VueMultiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
 import { ref } from "vue";
@@ -178,6 +187,7 @@ export default {
         auth: Object,
         customers: Array,
         carts_total: Number,
+        session: Object,
     },
 
     setup(props) {
@@ -203,8 +213,26 @@ export default {
             product.value = {};
             barcode.value = "";
         };
-        
+
         const grandTotal = ref(props.carts_total);
+
+        const addToCart = () => {
+            router.post(
+                "/apps/transactions/addToCart",
+                {
+                    product_id: product.value.id,
+                    qty: qty.value,
+                    sell_price: product.value.sell_price,
+                },
+                {
+                    onSuccess: () => {
+                        clearSearch();
+                        qty.value = 1;
+                        grandTotal.value = props.carts_total;
+                    },
+                }
+            );
+        };
 
         return {
             barcode,
@@ -213,6 +241,7 @@ export default {
             clearSearch,
             qty,
             grandTotal,
+            addToCart,
         };
     },
 };
