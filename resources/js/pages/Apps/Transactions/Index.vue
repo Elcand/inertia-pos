@@ -16,6 +16,8 @@
                                     <input
                                         type="text"
                                         class="form-control"
+                                        v-model="barcode"
+                                        @keyup="searchProduct"
                                         placeholder="Scan or Input Barcode"
                                     />
                                 </div>
@@ -26,6 +28,7 @@
                                     <input
                                         type="text"
                                         class="form-control"
+                                        :value="product.title"
                                         placeholder="Product Name"
                                         readonly
                                     />
@@ -37,18 +40,22 @@
                                     <input
                                         type="number"
                                         class="form-control text-center"
+                                        v-model="qty"
                                         placeholder="Qty"
                                         min="1"
                                     />
                                 </div>
                                 <div class="text-end">
                                     <button
+                                        @click.prevent="clearSearch"
                                         class="btn btn-warning btn-md border-0 shadow text-uppercase mt-3 me-2"
+                                        :disabled="!product.id"
                                     >
                                         CLEAR
                                     </button>
                                     <button
                                         class="btn btn-success btn-md border-0 shadow text-uppercase mt-3"
+                                        :disabled="!product.id"
                                     >
                                         ADD ITEM
                                     </button>
@@ -154,18 +161,53 @@ import LayoutApp from "../../../Layouts/App.vue";
 import { Head } from "@inertiajs/vue3";
 import VueMultiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
+import { ref } from "vue";
+import axios from "axios";
 
 export default {
     layout: LayoutApp,
 
     components: {
         Head,
-        VueMultiselect
+        VueMultiselect,
     },
 
     props: {
         auth: Object,
-        customers: Array
+        customers: Array,
+    },
+
+    setup(props) {
+        const barcode = ref("");
+        const product = ref({});
+        const qty = ref(1);
+
+        const searchProduct = () => {
+            axios
+                .post("/apps/transactions/searchProduct", {
+                    barcode: barcode.value,
+                })
+                .then((response) => {
+                    if (response.data.success) {
+                        product.value = response.data.data;
+                    } else {
+                        product.value = {};
+                    }
+                });
+        };
+
+        const clearSearch = () => {
+            product.value = {};
+            barcode.value = "";
+        };
+
+        return {
+            barcode,
+            product,
+            searchProduct,
+            clearSearch,
+            qty,
+        };
     },
 };
 </script>
