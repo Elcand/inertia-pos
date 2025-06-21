@@ -85,6 +85,18 @@
                                         <h4 class="fw-bold">
                                             Rp. {{ formatPrice(grandTotal) }}
                                         </h4>
+                                        <div v-if="change > 0">
+                                            <hr />
+                                            <h5 class="text-success">
+                                                Change :
+                                                <strong
+                                                    >Rp.
+                                                    {{
+                                                        formatPrice(change)
+                                                    }}</strong
+                                                >
+                                            </h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -185,6 +197,8 @@
                                         <label>Discount (Rp.)</label>
                                         <input
                                             type="number"
+                                            v-model="discount"
+                                            @keyup="setDiscount"
                                             class="form-control"
                                             placeholder="Discount (Rp.)"
                                         />
@@ -193,6 +207,8 @@
                                         <label>Pay (Rp.)</label>
                                         <input
                                             type="number"
+                                            v-model="cash"
+                                            @keyup="setChange"
                                             class="form-control"
                                             placeholder="Pay (Rp.)"
                                         />
@@ -206,6 +222,9 @@
                                     </button>
                                     <button
                                         class="btn btn-purple btn-md border-0 shadow text-uppercase"
+                                        :disabled="
+                                            cash < grandTotal || grandTotal == 0
+                                        "
                                     >
                                         Pay Order & Print
                                     </button>
@@ -282,6 +301,8 @@ export default {
                         clearSearch();
                         qty.value = 1;
                         grandTotal.value = props.carts_total;
+                        cash.value = 0;
+                        change.value = 0;
                     },
                 }
             );
@@ -296,9 +317,25 @@ export default {
                 {
                     onSuccess: () => {
                         grandTotal.value = props.carts_total;
+                        cash.value = 0;
+                        change.value = 0;
                     },
                 }
             );
+        };
+
+        const cash = ref(0);
+        const change = ref(0);
+        const discount = ref(0);
+
+        const setDiscount = () => {
+            grandTotal.value = props.carts_total - discount.value;
+            cash.value = 0;
+            change.value = 0;
+        };
+
+        const setChange = () => {
+            change.value = cash.value - grandTotal.value;
         };
 
         return {
@@ -310,6 +347,11 @@ export default {
             grandTotal,
             addToCart,
             destroyCart,
+            cash,
+            change,
+            discount,
+            setDiscount,
+            setChange,
         };
     },
 };
