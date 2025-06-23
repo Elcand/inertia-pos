@@ -39,5 +39,6 @@ Route::prefix('apps')->group(function () {
         Route::get('/sales', [SaleController::class, 'index'])->name('apps.sales.index');
         Route::get('/sales/filter', [SaleController::class, 'filter'])->name('apps.sales.filter');
         Route::get('/sales/export', [SaleController::class, 'export'])->name('apps.sales.export');
+        Route::get('/sales/pdf', [SaleController::class, 'pdf'])->name('apps.sales.pdf');
     });
 });
