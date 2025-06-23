@@ -6,6 +6,7 @@ use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\PermissionController;
 use App\Http\Controllers\Apps\ProductController;
 use App\Http\Controllers\Apps\RoleController;
+use App\Http\Controllers\Apps\SaleController;
 use App\Http\Controllers\Apps\TransactionController;
 use App\Http\Controllers\Apps\UserController;
 use App\Models\Category;
@@ -35,5 +36,7 @@ Route::prefix('apps')->group(function () {
         Route::post('/transactions/destroyCart', [TransactionController::class, 'destroyCart'])->name('apps.transactions.destroyCart');
         Route::post('/transactions/store', [TransactionController::class, 'store'])->name('apps.transactions.store');
         Route::get('/transactions/print', [TransactionController::class, 'print'])->name('apps.transactions.print');
+        Route::get('/sales', [SaleController::class, 'index'])->name('apps.sales.index');
+        Route::get('/sales/filter', [SaleController::class, 'filter'])->name('apps.sales.filter');
     });
 });
