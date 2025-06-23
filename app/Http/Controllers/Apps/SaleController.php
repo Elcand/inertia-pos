@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Apps;
 
+use App\Exports\SalesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SaleController extends Controller
 {
@@ -42,5 +44,10 @@ class SaleController extends Controller
             'sales' => $sales,
             'total' => $total
         ]);
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new SalesExport($request->start_date, $request->end_date), 'sales : ' . $request->start_date . ' - ' . $request->end_date . '.xlsx');
     }
 }
