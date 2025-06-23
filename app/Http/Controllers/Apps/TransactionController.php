@@ -145,6 +145,6 @@ class TransactionController extends Controller
             ->where('invoice', $request->invoice)
             ->firstOrFail();
 
-        return view('print.nota', compact('transaction'));
+        return view('print.note', compact('transaction'));
     }
 }
