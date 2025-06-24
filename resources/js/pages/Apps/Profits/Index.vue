@@ -23,7 +23,7 @@
                                             <div class="mb-3">
                                                 <label
                                                     class="form-label fw-bold"
-                                                    >START DATE</label
+                                                    >Start Date</label
                                                 >
                                                 <input
                                                     type="date"
@@ -42,7 +42,7 @@
                                             <div class="mb-3">
                                                 <label
                                                     class="form-label fw-bold"
-                                                    >END DATE</label
+                                                    >End Date</label
                                                 >
                                                 <input
                                                     type="date"
@@ -77,7 +77,7 @@
                                     <hr />
                                     <div class="export text-end mb-3">
                                         <a
-                                            href="#"
+                                            :href="`/apps/profits/export?start_date=${start_date}&end_date=${end_date}`"
                                             class="btn btn-success btn-md border-0 shadow me-3"
                                             ><i class="fa fa-file-excel"></i>
                                             EXCEL</a

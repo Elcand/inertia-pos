@@ -43,5 +43,6 @@ Route::prefix('apps')->group(function () {
         Route::get('/sales/pdf', [SaleController::class, 'pdf'])->name('apps.sales.pdf');
         Route::get('/profits', [ProfitController::class, 'index'])->name('apps.profits.index');
         Route::get('/profits/filter', [ProfitController::class, 'filter'])->name('apps.profits.filter');
+        Route::get('/profits/export', [ProfitController::class, 'export'])->name('apps.profits.export');
     });
 });
