@@ -83,7 +83,7 @@
                                             EXCEL</a
                                         >
                                         <a
-                                            href="#"
+                                            :href="`/apps/profits/pdf?start_date=${start_date}&end_date=${end_date}`"
                                             target="_blank"
                                             class="btn btn-secondary btn-md border-0 shadow"
                                             ><i class="fa fa-file-pdf"></i>

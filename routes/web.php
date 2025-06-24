@@ -44,5 +44,6 @@ Route::prefix('apps')->group(function () {
         Route::get('/profits', [ProfitController::class, 'index'])->name('apps.profits.index');
         Route::get('/profits/filter', [ProfitController::class, 'filter'])->name('apps.profits.filter');
         Route::get('/profits/export', [ProfitController::class, 'export'])->name('apps.profits.export');
+        Route::get('/profits/pdf', [ProfitController::class, 'pdf'])->name('apps.profits.pdf');
     });
 });
