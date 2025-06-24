@@ -184,9 +184,9 @@
                     </tr>
                     @foreach ($transaction->details()->get() as $item)
                         <tr>
-                            <td class="name">{{ $item->product->title }}</td>
-                            <td class="qty" style="text-center">{{ $item->product->qty }}</td>
-                            <td class="final-price" style="text-align: right;" colspan="5">
+                            <td class='name'>{{ $item->product->title }}</td>
+                            <td class='qty' style='text-align: center'>{{ $item->qty }}</td>
+                            <td class='final-price' style='text-align: right' colspan="5">
                                 {{ formatPrice($item->price) }}</td>
                         </tr>
                     @endforeach
@@ -241,7 +241,7 @@
             </div>
             <div class="azost" style="margin-top: 5px;">
                 THANK YOU <br>
-            FOT VISITING US.
+                FOT VISITING US.
             </div>
         </div>
     </div>

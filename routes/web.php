@@ -5,6 +5,7 @@ use App\Http\Controllers\Apps\CustomerController;
 use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\PermissionController;
 use App\Http\Controllers\Apps\ProductController;
+use App\Http\Controllers\Apps\ProfitController;
 use App\Http\Controllers\Apps\RoleController;
 use App\Http\Controllers\Apps\SaleController;
 use App\Http\Controllers\Apps\TransactionController;
@@ -40,5 +41,7 @@ Route::prefix('apps')->group(function () {
         Route::get('/sales/filter', [SaleController::class, 'filter'])->name('apps.sales.filter');
         Route::get('/sales/export', [SaleController::class, 'export'])->name('apps.sales.export');
         Route::get('/sales/pdf', [SaleController::class, 'pdf'])->name('apps.sales.pdf');
+        Route::get('/profits', [ProfitController::class, 'index'])->name('apps.profits.index');
+        Route::get('/profits/filter', [ProfitController::class, 'filter'])->name('apps.profits.filter');
     });
 });
