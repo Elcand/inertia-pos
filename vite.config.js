@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
-import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
@@ -9,7 +8,6 @@ export default defineConfig({
             input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
         }),
-        tailwindcss(),
         vue({
             template: {
                 transformAssetUrls: {
@@ -19,4 +17,18 @@ export default defineConfig({
             },
         }),
     ],
+    build: {
+        outDir: "public/build",
+        manifest: true,
+        rollupOptions: {
+            input: "resources/js/app.js",
+            output: {
+                manualChunks: {
+                    vue: ["vue"],
+                    tailwind: ["tailwindcss"],
+                },
+            },
+        },
+        chunkSizeWarningLimit: 1000,
+    },
 });
