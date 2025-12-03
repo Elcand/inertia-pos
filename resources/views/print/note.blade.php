@@ -240,8 +240,7 @@
                 =====================================
             </div>
             <div class="azost" style="margin-top: 5px;">
-                THANK YOU <br>
-                FOT VISITING US.
+                Thank you for coming, <br>PLEASE COME AGAIN
             </div>
         </div>
     </div>
